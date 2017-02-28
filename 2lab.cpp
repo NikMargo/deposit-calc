@@ -29,4 +29,21 @@ int raschet(int* sr, double* sv)
 	}
  	   
 }
+int main(){
+    int sr;
+    double sv;
+    vvod(&sr,&sv);
+    if (sr<0 || sr>365){
+	    cout<<"Eror"<<" ";
+	        return 1;
+    }
+
+    if (sv<1000){
+	    cout<<"Eror2"<<" ";
+	        return 1;
+    }
+     raschet(&sr, &sv);
+        cout<<"Itog:"<<sv;
+    return 0;
+}
 
