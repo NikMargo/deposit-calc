@@ -2,12 +2,12 @@
 #include <stdio.h>
 using namespace std;
 
-void raschet(int*, double*);
-int getinput(int*, double*);
+int raschet(int*, int*);
+int getinput(int*, int*);
 
 int main(){
      int sr,x;
-    double sv;
+    int sv;
     cout<<"Srok vklada:";
     cin>>sr;
     cout<<"Summa vklada:";
@@ -21,7 +21,7 @@ int main(){
 return 0;
 }
 
-int getinput(int* sr, double* sv)
+int getinput(int* sr, int* sv)
 {
     if (*sr<0 || *sr>365 || *sv<1000)
     {
@@ -31,10 +31,10 @@ int getinput(int* sr, double* sv)
         return 1;
 
 }
-void raschet(int* sr, double* sv)
+int raschet(int* sr, int* sv)
 {
     if (*sr>0 && *sr<=30){
-    *sv*=0.9;
+        *sv*=0.9;
     }
 
     if (*sr>=31 && *sr<=120){
@@ -46,7 +46,8 @@ void raschet(int* sr, double* sv)
     }
 
     if (*sr>=241 && *sr<=365){
-       *sv*=1.12;
+        *sv*=1.12;
     }
-
+return *sv;
 }
+

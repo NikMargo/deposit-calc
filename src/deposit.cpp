@@ -11,7 +11,7 @@ int getinput(int* sr, double* sv)
         return 1;
 
 } 
-void raschet(int* sr, double* sv)
+double raschet(int* sr, double* sv)
 {	
     if (*sr>0 && *sr<=30){
  	    *sv*=0.9;
