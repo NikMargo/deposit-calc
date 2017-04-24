@@ -1,19 +1,39 @@
-CC=g++
-CFLAGS= -I src -Wall -Werror
-EXECUTABLE = bin/prog 
-DIR = build
+CC=gcc
+CFLAGS= -I src -I thirdparty -Wall -Werror
+EXECUTABLE = bin/prog
+TEST=bin/deposit-test
+DIR1=build/test
+DIR2=build/src
 
 
-all: $(DIR)/main.o $(DIR)/deposit.o
+all: $(DIR2)/main.o $(DIR2)/deposit.o
 	mkdir -p bin
-	$(CC) $(DIR)/main.o $(DIR)/deposit.o -o $(EXECUTABLE)
+	$(CC) $(DIR2)/main.o $(DIR2)/deposit.o -o $(EXECUTABLE)
 
-$(DIR)/main.o: src/main.cpp
+$(DIR2)/main.o: src/main.c
 	mkdir -p build
-	$(CC) $(CFLAGS) -c src/main.cpp -o $(DIR)/main.o
+	mkdir -p build/src
+	$(CC) $(CFLAGS) -c src/main.c -o $(DIR2)/main.o
 
-$(DIR)/deposit.o: src/deposit.cpp
-	$(CC) $(CFLAGS) -c src/deposit.cpp -o $(DIR)/deposit.o
+$(DIR2)/deposit.o: src/deposit.c
+	$(CC) $(CFLAGS) -c src/deposit.c -o $(DIR2)/deposit.o
+
+all: deposit-calc-test
+
+deposit-calc-test: $(DIR1)/main.o $(DIR1)/deposit_test.o $(DIR1)/validation_test.o $(DIR2)/deposit.o
+	mkdir -p bin
+	$(CC) $(DIR1)/main.o $(DIR1)/deposit_test.o $(DIR1)/validation_test.o $(DIR2)/deposit.o -o $(TEST)
+
+$(DIR1)/main.o: test/main.c
+	mkdir -p build
+	mkdir -p build/test
+	$(CC) $(CFLAGS) -c test/main.c -o $(DIR1)/main.o
+
+$(DIR1)/deposit_test.o: test/deposit_test.c
+	$(CC) $(CFLAGS) -c test/deposit_test.c -o $(DIR1)/deposit_test.o
+
+$(DIR1)/validation_test.o: test/validation_test.c
+	$(CC) $(CFLAGS) -c test/validation_test.c -o $(DIR1)/validation_test.o
 
 
 #.PHONY clean
