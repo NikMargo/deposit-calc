@@ -11,14 +11,14 @@ CTEST(AmountBordersDat,TestBord1)
 CTEST(AmountBordersDat,TestBord2)
 {
     const int result = raschet(120, 2000);
-    const int expected = 1040;
+    const int expected = 2040;
     ASSERT_EQUAL(expected, result);
 }
 
 CTEST(AmountBordersDat,TestBord3)
 {
     const int result = raschet(240, 1000);
-    const int expected = 2120;
+    const int expected = 1060;
     ASSERT_EQUAL(expected, result);
 }
 
